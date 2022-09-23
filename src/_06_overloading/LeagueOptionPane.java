@@ -1,5 +1,7 @@
 package _06_overloading;
 
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -21,8 +23,21 @@ public class LeagueOptionPane {
 		// 1. Open example.png and make a GUI that looks like that
 		//    The message parameter is what we want to show on our pop-up
 		JFrame frame = new JFrame();
+		JLabel label = new JLabel();
+		JLabel label2 = new JLabel(message);
 		
-		// 2. Uncomment the line of code below. It sets the location of our frame to the center of the screen
+		ImageIcon icon = loadImage("league.png");
+		
+		label.setIcon(icon);
+		
+	frame.setLayout(new FlowLayout());
+
+
+		frame.add(label);
+		frame.add(label2);
+		frame.pack();
+		frame.setVisible(true);
+
 		frame.setLocationRelativeTo(null);
 	}
 	
@@ -32,12 +47,57 @@ public class LeagueOptionPane {
 	// 4. Create another showMessageDialog() method that lets us also choose the Message and Title 
 	//    2 String parameters (one for the message and one for the title)
 	
+	public static void showMessageDialog(String message, String title) {
+		
+		JFrame frame = new JFrame();
+		JLabel label = new JLabel();
+		JLabel label2 = new JLabel(message);
+		
+		ImageIcon icon = loadImage("league.png");
+		
+		label.setIcon(icon);
+		
+	frame.setLayout(new FlowLayout());
+
+	frame.setTitle(title);
+
+		frame.add(label);
+		frame.add(label2);
+		frame.pack();
+		frame.setVisible(true);
+
+		frame.setLocationRelativeTo(null);
+	}
 	// 5. Call this method in the Runner class
 	
+		
 	
 	// 6. Create another showMessageDialog() method that lets us choose the Message, Title, and Image
 	//    3 String parameters (one for the message, one for the title, and one for the fileName)
 	
+	public static void showMessageDialog(String message, String title, String image) {
+
+		JFrame frame = new JFrame();
+		JLabel label = new JLabel();
+		JLabel label2 = new JLabel(message);
+		
+		ImageIcon icon = loadImage(image);
+		
+		label.setIcon(icon);
+		
+	frame.setLayout(new FlowLayout());
+
+	frame.setTitle(title);
+
+	
+		frame.add(label);
+		frame.add(label2);
+		frame.pack();
+		frame.setVisible(true);
+
+		frame.setLocationRelativeTo(null);
+	}
+		
 	// 7. Call this method in the Runner class
 	
 	// CHALLENGE: 
