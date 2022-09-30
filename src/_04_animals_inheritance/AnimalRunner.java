@@ -19,6 +19,7 @@ public class AnimalRunner {
 		c.printName();
 		c.play();
 		c.eat();
+		//c.super.eat();
 		c.sleep();
 	}
 }

@@ -1,5 +1,7 @@
 package _08_LeagueSnake;
 
+import java.awt.Color;
+
 import processing.core.PApplet;
 
 public class LeagueSnake extends PApplet {
@@ -12,6 +14,15 @@ public class LeagueSnake extends PApplet {
      * Put all the game variables here.
      */
     
+    Segment snakeHead;
+    int foodX;
+    int foodY;
+    
+    
+    int direction = UP;
+    
+    
+    int food = 0;
 
     
     /*
@@ -21,17 +32,23 @@ public class LeagueSnake extends PApplet {
      */
     @Override
     public void settings() {
-        
+    	 size(500, 500);
     }
 
     @Override
     public void setup() {
-        
+    	snakeHead=new Segment(250,250);
+    	
+    	frameRate(20);
+    	
+    	dropFood();
     }
 
     void dropFood() {
         // Set the food in a new random location
-        
+    	foodX = ((int)random(50)*10);
+    	foodY = ((int)random(50)*10);
+
     }
 
     /*
@@ -42,16 +59,30 @@ public class LeagueSnake extends PApplet {
 
     @Override
     public void draw() {
-        
+    	
+    	background(0,0,0);
+    	
+    	move();
+    	
+    	drawFood();
+    	drawSnake();
     }
 
-    void drawFood() {
+
+
+	void drawFood() {
         // Draw the food
-        
+		
+		fill(255,0,0);
+		rect(foodX, foodY, 10, 10);
+
     }
 
     void drawSnake() {
         // Draw the head of the snake followed by its tail
+    	
+		fill(0,255,0);
+    	rect(snakeHead.x, snakeHead.y, 10, 10);
     }
 
     void drawTail() {
@@ -92,19 +123,23 @@ public class LeagueSnake extends PApplet {
     void move() {
         // Change the location of the Snake head based on the direction it is moving.
 
-        /*
+        
         if (direction == UP) {
-            // Move head up
+            snakeHead.y -= 10;
             
         } else if (direction == DOWN) {
-            // Move head down
-                
+            snakeHead.y += 10;
+        	
         } else if (direction == LEFT) {
-            
+            snakeHead.x -= 10;
+        	
         } else if (direction == RIGHT) {
-            
+            snakeHead.x += 10;
+        	
         }
-        */
+        
+        checkBoundaries();
+        
     }
 
     void checkBoundaries() {

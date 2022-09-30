@@ -84,6 +84,7 @@ if(time<=0) {
 if(time<2) {
 	System.out.println("You Win");
 }else {
+	System.out.println(time);
 	time = maxTime;
 }
 		}
