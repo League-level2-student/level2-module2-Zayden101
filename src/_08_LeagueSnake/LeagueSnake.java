@@ -1,6 +1,7 @@
 package _08_LeagueSnake;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 
 import processing.core.PApplet;
 
@@ -114,10 +115,27 @@ public class LeagueSnake extends PApplet {
      * These methods are used to change what is happening to the snake
      */
 
-    @Override
     public void keyPressed() {
         // Set the direction of the snake according to the arrow keys pressed
         
+
+    	if(key == CODED) {
+        if (keyCode == UP) {
+            direction = UP;
+            
+        } else if (keyCode == DOWN) {
+            direction = DOWN;
+            
+        } else if (keyCode == LEFT) {
+            direction = LEFT;
+            
+        } else if (keyCode == RIGHT) {
+            direction = RIGHT;
+            
+        }
+        
+    	}
+    	
     }
 
     void move() {
@@ -144,13 +162,30 @@ public class LeagueSnake extends PApplet {
 
     void checkBoundaries() {
         // If the snake leaves the frame, make it reappear on the other side
-        
+    	if(snakeHead.x>500){
+    		snakeHead.x=0;
+    		 }
+    		 if(snakeHead.x<0){
+    			 snakeHead.x=500;
+    		 }
+    		 if(snakeHead.y<0){
+    			 snakeHead.y=500;
+    		 }
+    		 if(snakeHead.y>500){
+    			 snakeHead.y=0;
+    		 }
+
     }
 
     void eat() {
         // When the snake eats the food, its tail should grow and more
         // food appear
         
+    	if(snakeHead.x == foodX  && snakeHead.y == foodY) {
+    		food+=1;
+    		dropFood();
+    	}
+    	
     }
 
     static public void main(String[] passedArgs) {
