@@ -2,6 +2,8 @@ package _08_LeagueSnake;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import processing.core.PApplet;
 
@@ -19,6 +21,7 @@ public class LeagueSnake extends PApplet {
     int foodX;
     int foodY;
     
+    List<Segment> snakeTail = new ArrayList<>();
     
     int direction = UP;
     
@@ -67,6 +70,8 @@ public class LeagueSnake extends PApplet {
     	
     	drawFood();
     	drawSnake();
+    	
+    	eat();
     }
 
 
@@ -84,11 +89,21 @@ public class LeagueSnake extends PApplet {
     	
 		fill(0,255,0);
     	rect(snakeHead.x, snakeHead.y, 10, 10);
+    	
+    	manageTail();
     }
 
     void drawTail() {
         // Draw each segment of the tail
-        
+    	
+for (Segment e : snakeTail) {
+	rect(e.x, e.y, 10, 10);
+
+}
+
+    	
+
+    	
     }
 
     /*
@@ -102,11 +117,33 @@ public class LeagueSnake extends PApplet {
         // remove the one at the "end"
         // This produces the illusion of the snake tail moving.
 
+    	checkTailCollision();
+    	drawTail();
+    	
+    	Segment snakTail = new Segment(snakeHead.x, snakeHead.y);
+    	snakeTail.add(snakTail);
+    	
+    	snakeTail.remove(0);
+    	
     }
 
     void checkTailCollision() {
         // If the snake crosses its own tail, shrink the tail back to one segment
         
+    	for (Segment o : snakeTail) {
+    		
+			  	if(snakeHead.x == o.x && snakeHead.y == o.y) {
+    		food = 0;
+    		
+    	    snakeTail = new ArrayList<>();
+    	    
+    		
+    	}
+			  	
+		}
+    	
+  
+    	
     }
 
     /*
@@ -121,16 +158,28 @@ public class LeagueSnake extends PApplet {
 
     	if(key == CODED) {
         if (keyCode == UP) {
-            direction = UP;
-            
+        	
+        		if(direction!=DOWN) {
+        		direction = UP;
+        	}
+        	
         } else if (keyCode == DOWN) {
-            direction = DOWN;
+        	
+    		if(direction!=UP) {
+    		direction = DOWN;
+    	}
             
         } else if (keyCode == LEFT) {
-            direction = LEFT;
+        	
+    		if(direction!=RIGHT) {
+    		direction = LEFT;
+    	}
             
         } else if (keyCode == RIGHT) {
-            direction = RIGHT;
+        	
+    		if(direction!=LEFT) {
+    		direction = RIGHT;
+    	}
             
         }
         
@@ -143,7 +192,7 @@ public class LeagueSnake extends PApplet {
 
         
         if (direction == UP) {
-            snakeHead.y -= 10;
+        	snakeHead.y -= 10;
             
         } else if (direction == DOWN) {
             snakeHead.y += 10;
