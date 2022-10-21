@@ -5,6 +5,8 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jointheleague.graphical.robot.Robot;
+
 import processing.core.PApplet;
 
 public class LeagueSnake extends PApplet {
@@ -98,11 +100,11 @@ public class LeagueSnake extends PApplet {
     	
 for (Segment e : snakeTail) {
 	rect(e.x, e.y, 10, 10);
-
+	
+	
 }
 
-    	
-
+//manageTail();
     	
     }
 
@@ -134,7 +136,9 @@ for (Segment e : snakeTail) {
     		
 			  	if(snakeHead.x == o.x && snakeHead.y == o.y) {
     		food = 0;
-    		
+    		snakeHead.x=250;
+    		snakeHead.y=250;
+
     	    snakeTail = new ArrayList<>();
     	    
     		
@@ -211,18 +215,51 @@ for (Segment e : snakeTail) {
 
     void checkBoundaries() {
         // If the snake leaves the frame, make it reappear on the other side
-    	if(snakeHead.x>500){
+    	
+
+		
+		if(snakeHead.x>490){
+			food = 0;
+			snakeHead.x=250;
+			snakeHead.y=250;
+    	    snakeTail = new ArrayList<>();
+
+    		 }
+    		 if(snakeHead.x<0){
+    			 food = 0;
+    				snakeHead.x=250;
+    				snakeHead.y=250;
+    	    	    snakeTail = new ArrayList<>();
+
+    		 }
+    		 if(snakeHead.y<0){
+    			 food = 0;
+    			snakeHead.x=250;
+    			snakeHead.y=250;
+        	    snakeTail = new ArrayList<>();
+
+    		 }
+    		 if(snakeHead.y>490){
+    			 food = 0;
+    				snakeHead.x=250;
+    				snakeHead.y=250;
+    	    	    snakeTail = new ArrayList<>();
+
+    		 }
+    		 
+    		 
+    	/*if(snakeHead.x>490){
     		snakeHead.x=0;
     		 }
     		 if(snakeHead.x<0){
-    			 snakeHead.x=500;
+    			 snakeHead.x=490;
     		 }
     		 if(snakeHead.y<0){
-    			 snakeHead.y=500;
+    			 snakeHead.y=490;
     		 }
-    		 if(snakeHead.y>500){
+    		 if(snakeHead.y>490){
     			 snakeHead.y=0;
-    		 }
+    		 }*/
 
     }
 
@@ -233,7 +270,15 @@ for (Segment e : snakeTail) {
     	if(snakeHead.x == foodX  && snakeHead.y == foodY) {
     		food+=1;
     		dropFood();
+    		
+    		Segment s = new Segment(snakeHead.x, snakeHead.y);
+    		snakeTail.add(s);
+
+
+    		
     	}
+    	
+    	
     	
     }
 
